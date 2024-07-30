@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../components/layout/layout.js";
+import Layout from "../components/layout/layout";
 
 const Dashboard = () => {
   return (
@@ -8,7 +8,7 @@ const Dashboard = () => {
     </Layout>
   );
   // eslint-disable-next-line
-};
+}
 
 export default Dashboard;
 
