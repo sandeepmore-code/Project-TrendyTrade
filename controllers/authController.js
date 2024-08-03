@@ -5,7 +5,7 @@ import JWT from "jsonwebtoken";
 
 export const registerCOntroller = async (req, res) => {
   try {
-    const { name, email, password, phone, address ,answer} = req.body;
+    const { name, email, password, phone, address, answer } = req.body;
     // validation
     if (!name) {
       return res.send({ message: "name is required" });
@@ -99,7 +99,7 @@ export const loginController = async (req, res) => {
         email: user.email,
         phone: user.phone,
         address: user.address,
-        role: user.role  
+        role: user.role,
       },
       token,
     });
@@ -114,45 +114,45 @@ export const loginController = async (req, res) => {
 
 // Forget Password Controller
 
-export const ForgotPasswordController= async(req,res)=>{
-  try{
-    const {email,answer,newPassword} = req.body
-    if(!email){
-      res.status(400).send({message:'Email is required'})
+export const ForgotPasswordController = async (req, res) => {
+  try {
+    const { email, answer, newPassword } = req.body;
+    if (!email) {
+      res.status(400).send({ message: "Email is required" });
     }
-    if(!answer){
-      res.status(400).send({message:'answer is required'})
+    if (!answer) {
+      res.status(400).send({ message: "answer is required" });
     }
-    if(!newPassword){
-      res.status(400).send({message:'newpassword is required'})
+    if (!newPassword) {
+      res.status(400).send({ message: "newpassword is required" });
     }
     // check
-    const user = await userModels.findOne({email,answer})
+    const user = await userModels.findOne({ email, answer });
     // validation
-    if(!user){
+    if (!user) {
       return res.status(404).send({
         success: false,
-        message: 'Wrong Email or Answer'
-      })
+        message: "Wrong Email or Answer",
+      });
     }
-    const hashed = await hashPassword(newPassword)
-    await userModels.findByIdAndUpdate(user._id,{ password : hashed });
+    const hashed = await hashPassword(newPassword);
+    await userModels.findByIdAndUpdate(user._id, { password: hashed });
     res.status(200).send({
       success: true,
       message: "Password Rest Sucessfully",
-    })
-  }catch(error){
+    });
+  } catch (error) {
     console.log(error);
     res.status(500).send({
-      success:false,
-      message:'something went Wrong',
-      error
-    })
+      success: false,
+      message: "something went Wrong",
+      error,
+    });
   }
 };
 
 // test controller
 
-export const testCotrollers=(req,res)=>{
-  res.send("Protected route")
-}
+export const testCotrollers = (req, res) => {
+  res.send("Protected route");
+};
