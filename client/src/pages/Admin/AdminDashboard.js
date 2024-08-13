@@ -4,7 +4,7 @@ import Layout from "../../components/layout/layout";
 const AdminDashboard = () => {
   return (
     <Layout title={"Admin Dasboard"}>
-      <h1>Admin Dashboard</h1>
+      <div className="container-fluid"></div>
     </Layout>
   );
 };
